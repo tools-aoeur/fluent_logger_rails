@@ -2,12 +2,12 @@
 require 'active_support'
 
 module FluentLoggerRails
-  class Logger < ::ActiveSupport::Logger
+  class Logger < ::Logger
     def initialize(logger, path:, level:)
       @level = SEV_LABEL.index(level.to_s.upcase)
       @path = path
       @logger = logger
-      after_initialize if respond_to?(:after_initialize) && ActiveSupport::VERSION::MAJOR < 6
+      after_initialize if respond_to?(:after_initialize)
     end
 
     def add(severity, message = nil, progname = nil)
